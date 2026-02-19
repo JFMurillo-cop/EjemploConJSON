@@ -107,7 +107,7 @@ function calcularCuotaPrestamo(prestamo, n, i){
     // Fórmula: cuota = préstamo × [(1+i)^n × i] / [(1+i)^n - i]
     const unoPlusI = 1 + i;
     const unoPlusIPowN = Math.pow(unoPlusI, n);
-    const cuota = prestamo * (unoPlusIPowN * i) / (unoPlusIPowN - 1);
+    const cuota = prestamo * (unoPlusIPowN * i) / (unoPlusIPowN - i);
     return cuota;
 }
 
