@@ -76,6 +76,44 @@
                 </table>                          
             </form>
         </div>
+
+        <div class="elEstilo">
+            <h1>Calculadora de Préstamos</h1>
+            <form id="generarPrestamo">
+                <table>
+                    <caption>Calculadora de Préstamos</caption>
+                    <tbody>
+                        <tr>
+                            <td>Nombre:</td>
+                            <td><input type="text" id="elNombre" name="nombre" required></td>
+                        </tr>
+                        <tr>
+                            <td>Préstamo ($):</td>
+                            <td><input type="number" id="elPrestamo" name="prestamo" step="0.01" required></td>
+                        </tr>
+                        <tr>
+                            <td>Meses:</td>
+                            <td><input type="number" id="losMeses" name="meses" min="1" required></td>
+                        </tr>
+                        <tr>
+                            <td>Interés (%):</td>
+                            <td><input type="number" id="elInteres" name="interes" value="15" step="0.01" required></td>
+                        </tr>
+                        <tr>
+                            <td>Acción:</td>
+                            <td>
+                                <input type="radio" value="Calcular" name="accionPrestamo" checked>Calcular
+                                <input type="radio" value="Historial" name="accionPrestamo">Historial
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="submit" value="Enviar"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <textarea id="resultadoPrestamo" readonly></textarea>
+        </div>
     </main>
     <footer> 
         <hr>    
