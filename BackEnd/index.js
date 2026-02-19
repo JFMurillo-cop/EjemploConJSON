@@ -29,7 +29,7 @@ app.post('/transactions', (req, res) => {
   console.log('en post');
   let transaction = req.body;
  
-  if (transaction.accion =='Calcular'){
+  if (transaction.accion ==='Calcular'){
     const peso = transaction.peso;
     const estatura = transaction.estatura;
     // calcula el IMC
@@ -53,7 +53,7 @@ app.post('/prestamos', (req, res) => {
   console.log('en post prestamos');
   let prestamo_obj = req.body;
   
-  if (prestamo_obj.accion == 'Calcular'){
+  if (prestamo_obj.accion === 'Calcular'){
     const nombre = prestamo_obj.nombre;
     const prestamo = parseFloat(prestamo_obj.prestamo);
     const meses = parseInt(prestamo_obj.meses);
