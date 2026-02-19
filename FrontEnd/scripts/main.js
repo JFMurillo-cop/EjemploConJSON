@@ -37,3 +37,42 @@ formElement.addEventListener('submit',(event) =>{
         body: transactionJson
     })    
 })
+
+const formPrestamo = document.getElementById("generarPrestamo");
+
+formPrestamo.addEventListener('submit', (event) => {
+    event.preventDefault();
+    
+    let nombre = document.getElementById("elNombre").value;
+    let prestamo = document.getElementById("elPrestamo").value;
+    let meses = document.getElementById("losMeses").value;
+    let interes = document.getElementById("elInteres").value;
+    
+    let lasAccionesPrestamo = document.getElementsByName("accionPrestamo");
+    let accion;
+    for(let i=0; i<lasAccionesPrestamo.length; i++){
+        if (lasAccionesPrestamo[i].checked){
+            accion = lasAccionesPrestamo[i].value;
+            break;
+        }
+    }
+    
+    let prestamo_obj = { nombre, prestamo, meses, interes, accion };
+    let prestamoJson = JSON.stringify(prestamo_obj);
+    console.log(prestamoJson);
+    
+    fetch('http://localhost:3000/prestamos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'            
+        },
+        body: prestamoJson
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data && data.resultado) {
+            document.getElementById("resultadoPrestamo").value = data.resultado;
+        }
+    })
+    .catch(error => console.error('Error:', error));
+})

@@ -10,6 +10,7 @@ const app = express()
 const port = 3000
 
 let transactionArr = []
+let prestamosArr = []
 
 //#region 
 app.use(
@@ -28,7 +29,7 @@ app.post('/transactions', (req, res) => {
   console.log('en post');
   let transaction = req.body;
  
-  if (transaction.accion =='Calcular'){
+  if (transaction.accion ==='Calcular'){
     const peso = transaction.peso;
     const estatura = transaction.estatura;
     // calcula el IMC
@@ -40,6 +41,41 @@ app.post('/transactions', (req, res) => {
     transactionArr.unshift(newData);
   }else{  // Se solicita mostrar el Historial
     console.log(transactionArr);  
+  }
+})
+
+app.get('/prestamos', (req, res) => {
+  console.log('en get prestamos');
+  res.send(JSON.stringify(prestamosArr));
+})
+
+app.post('/prestamos', (req, res) => {
+  console.log('en post prestamos');
+  let prestamo_obj = req.body;
+  
+  if (prestamo_obj.accion === 'Calcular'){
+    const nombre = prestamo_obj.nombre;
+    const prestamo = parseFloat(prestamo_obj.prestamo);
+    const meses = parseInt(prestamo_obj.meses);
+    const interes = parseFloat(prestamo_obj.interes);
+    const i = interes / 100; // Convertir porcentaje a decimal
+    
+    // Calcular la cuota usando la función
+    const cuota = misFunciones.calcularCuotaPrestamo(prestamo, meses, i);
+    
+    // Crear objeto con el resultado
+    const newPrestamo = {nombre, cuota, prestamo, meses, interes};
+    console.log(newPrestamo);
+    
+    // Agregar al inicio del array
+    prestamosArr.unshift(newPrestamo);
+    
+    // Formatear respuesta
+    const resultado = `${nombre} - $ ${cuota.toFixed(2)} - $ ${prestamo} - ${meses} meses - interés ${interes}%`;
+    res.json({resultado});
+  }else{  // Se solicita mostrar el Historial
+    console.log(prestamosArr);
+    res.json({resultado: 'Historial mostrado en consola'});
   }
 })
 

@@ -103,8 +103,16 @@ function crearPaginaRespuesta(peso, estatura, imc){
     return nPage;
 }
 
+function calcularCuotaPrestamo(prestamo, n, i){
+    // Fórmula: cuota = préstamo × [(1+i)^n × i] / [(1+i)^n - i]
+    const unoPlusI = 1 + i;
+    const unoPlusIPowN = Math.pow(unoPlusI, n);
+    const cuota = prestamo * (unoPlusIPowN * i) / (unoPlusIPowN - i);
+    return cuota;
+}
+
 // se indican las funciones a importar
-module.exports = {obtenerIMC, crearPaginaRespuesta};
+module.exports = {obtenerIMC, crearPaginaRespuesta, calcularCuotaPrestamo};
 
 
 
